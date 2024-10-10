@@ -727,7 +727,7 @@ func TestCommands_CreateOIDCSessionFromDeviceAuth(t *testing.T) {
 				"123",
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -827,7 +827,7 @@ func TestCommands_CreateOIDCSessionFromDeviceAuth(t *testing.T) {
 				"123",
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -843,7 +843,7 @@ func TestCommands_CreateOIDCSessionFromDeviceAuth(t *testing.T) {
 					Header:        http.Header{"foo": []string{"bar"}},
 				},
 				Reason:       domain.TokenReasonAuthRequest,
-				RefreshToken: "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID-rt_refreshTokenID:userID
+				RefreshToken: "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID;rt_refreshTokenID:userID
 				SessionID:    "sessionID",
 			},
 		},

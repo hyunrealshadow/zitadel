@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	TokenDelimiter            = "-"
+	TokenDelimiter            = ";"
 	AccessTokenPrefix         = "at_"
 	RefreshTokenPrefix        = "rt_"
 	oidcTokenSubjectDelimiter = ":"

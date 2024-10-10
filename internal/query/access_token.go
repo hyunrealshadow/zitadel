@@ -7,6 +7,7 @@ import (
 
 	"golang.org/x/text/language"
 
+	"github.com/zitadel/zitadel/internal/command"
 	"github.com/zitadel/zitadel/internal/domain"
 	"github.com/zitadel/zitadel/internal/eventstore"
 	"github.com/zitadel/zitadel/internal/repository/oidcsession"
@@ -107,7 +108,7 @@ func (q *Queries) ActiveAccessTokenByToken(ctx context.Context, token string) (m
 	ctx, span := tracing.NewSpan(ctx)
 	defer func() { span.EndWithError(err) }()
 
-	split := strings.Split(token, "-")
+	split := strings.Split(token, command.TokenDelimiter)
 	if len(split) != 2 {
 		return nil, zerrors.ThrowUnauthenticated(nil, "QUERY-LJK2W", "Errors.OIDCSession.Token.Invalid")
 	}

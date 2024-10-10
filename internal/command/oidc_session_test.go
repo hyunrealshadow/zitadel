@@ -415,7 +415,7 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 			res{
 				session: &OIDCSession{
 					SessionID:         "sessionID",
-					TokenID:           "V2_oidcSessionID-at_accessTokenID",
+					TokenID:           "V2_oidcSessionID;at_accessTokenID",
 					ClientID:          "clientID",
 					UserID:            "userID",
 					Audience:          []string{"audience"},
@@ -432,7 +432,7 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 						Header:        http.Header{"foo": []string{"bar"}},
 					},
 					Reason:       domain.TokenReasonAuthRequest,
-					RefreshToken: "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID-rt_refreshTokenID:userID
+					RefreshToken: "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID;rt_refreshTokenID:userID
 				},
 				state: "state",
 			},
@@ -553,7 +553,7 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 			res{
 				session: &OIDCSession{
 					SessionID:         "sessionID",
-					TokenID:           "V2_oidcSessionID-at_accessTokenID",
+					TokenID:           "V2_oidcSessionID;at_accessTokenID",
 					ClientID:          "clientID",
 					UserID:            "userID",
 					Audience:          []string{"audience"},
@@ -570,7 +570,7 @@ func TestCommands_CreateOIDCSessionFromAuthRequest(t *testing.T) {
 						Header:        http.Header{"foo": []string{"bar"}},
 					},
 					Reason:       domain.TokenReasonAuthRequest,
-					RefreshToken: "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID-rt_refreshTokenID:userID
+					RefreshToken: "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID;rt_refreshTokenID:userID
 				},
 				state: "state",
 			},
@@ -916,7 +916,7 @@ func TestCommands_CreateOIDCSession(t *testing.T) {
 				needRefreshToken: false,
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -1016,7 +1016,7 @@ func TestCommands_CreateOIDCSession(t *testing.T) {
 				needRefreshToken: false,
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -1113,7 +1113,7 @@ func TestCommands_CreateOIDCSession(t *testing.T) {
 				needRefreshToken: true,
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -1134,7 +1134,7 @@ func TestCommands_CreateOIDCSession(t *testing.T) {
 					UserID: "user2",
 					Issuer: "foo.com",
 				},
-				RefreshToken: "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID-rt_refreshTokenID:userID
+				RefreshToken: "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID;rt_refreshTokenID:userID
 			},
 		},
 		{
@@ -1211,7 +1211,7 @@ func TestCommands_CreateOIDCSession(t *testing.T) {
 				sessionID:        "sessionID",
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -1371,7 +1371,7 @@ func TestCommands_CreateOIDCSession(t *testing.T) {
 				needRefreshToken: false,
 			},
 			want: &OIDCSession{
-				TokenID:           "V2_oidcSessionID-at_accessTokenID",
+				TokenID:           "V2_oidcSessionID;at_accessTokenID",
 				ClientID:          "clientID",
 				UserID:            "userID",
 				Audience:          []string{"audience"},
@@ -1495,7 +1495,7 @@ func TestCommands_ExchangeOIDCSessionRefreshAndAccessToken(t *testing.T) {
 			},
 			args{
 				ctx:             authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
+				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
 				complianceCheck: mockRefreshTokenComplianceChecker(nil),
 			},
 			res{
@@ -1524,7 +1524,7 @@ func TestCommands_ExchangeOIDCSessionRefreshAndAccessToken(t *testing.T) {
 			},
 			args{
 				ctx:             authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
+				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
 				complianceCheck: mockRefreshTokenComplianceChecker(nil),
 			},
 			res{
@@ -1557,7 +1557,7 @@ func TestCommands_ExchangeOIDCSessionRefreshAndAccessToken(t *testing.T) {
 			},
 			args{
 				ctx:             authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
+				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
 				complianceCheck: mockRefreshTokenComplianceChecker(nil),
 			},
 			res{
@@ -1613,7 +1613,7 @@ func TestCommands_ExchangeOIDCSessionRefreshAndAccessToken(t *testing.T) {
 			},
 			args{
 				ctx:             authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
+				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
 				scope:           []string{"openid", "offline_access"},
 				complianceCheck: mockRefreshTokenComplianceChecker(nil),
 			},
@@ -1674,18 +1674,18 @@ func TestCommands_ExchangeOIDCSessionRefreshAndAccessToken(t *testing.T) {
 			},
 			args{
 				ctx:             authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
+				refreshToken:    "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDp1c2VySUQ", //V2_oidcSessionID:rt_refreshTokenID:userID
 				scope:           []string{"openid", "offline_access"},
 				complianceCheck: mockRefreshTokenComplianceChecker(nil),
 			},
 			res{
 				session: &OIDCSession{
 					SessionID:         "sessionID",
-					TokenID:           "V2_oidcSessionID-at_accessTokenID",
+					TokenID:           "V2_oidcSessionID;at_accessTokenID",
 					ClientID:          "clientID",
 					UserID:            "userID",
 					Audience:          []string{"audience"},
-					RefreshToken:      "VjJfb2lkY1Nlc3Npb25JRC1ydF9yZWZyZXNoVG9rZW5JRDI6dXNlcklE", // V2_oidcSessionID-rt_refreshTokenID2:userID%
+					RefreshToken:      "VjJfb2lkY1Nlc3Npb25JRDtydF9yZWZyZXNoVG9rZW5JRDI6dXNlcklE", // V2_oidcSessionID;rt_refreshTokenID2:userID%
 					Expiration:        time.Time{}.Add(time.Hour),
 					Scope:             []string{"openid", "profile", "offline_access"},
 					AuthMethods:       []domain.UserAuthMethodType{domain.UserAuthMethodTypePassword},
@@ -1767,7 +1767,7 @@ func TestCommands_OIDCSessionByRefreshToken(t *testing.T) {
 			},
 			args{
 				ctx:          authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken: "V2_oidcSessionID-rt_refreshTokenID:userID",
+				refreshToken: "V2_oidcSessionID;rt_refreshTokenID:userID",
 			},
 			res{
 				err: zerrors.ThrowPreconditionFailed(nil, "OIDCS-s3hjk", "Errors.OIDCSession.RefreshTokenInvalid"),
@@ -1795,7 +1795,7 @@ func TestCommands_OIDCSessionByRefreshToken(t *testing.T) {
 			},
 			args{
 				ctx:          authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken: "V2_oidcSessionID-rt_refreshTokenID:userID",
+				refreshToken: "V2_oidcSessionID;rt_refreshTokenID:userID",
 			},
 			res{
 				err: zerrors.ThrowPreconditionFailed(nil, "OIDCS-28ubl", "Errors.OIDCSession.RefreshTokenInvalid"),
@@ -1827,7 +1827,7 @@ func TestCommands_OIDCSessionByRefreshToken(t *testing.T) {
 			},
 			args{
 				ctx:          authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken: "V2_oidcSessionID-rt_refreshTokenID:userID",
+				refreshToken: "V2_oidcSessionID;rt_refreshTokenID:userID",
 			},
 			res{
 				err: zerrors.ThrowPreconditionFailed(nil, "OIDCS-3jt2w", "Errors.OIDCSession.RefreshTokenInvalid"),
@@ -1859,7 +1859,7 @@ func TestCommands_OIDCSessionByRefreshToken(t *testing.T) {
 			},
 			args{
 				ctx:          authz.WithInstanceID(context.Background(), "instanceID"),
-				refreshToken: "V2_oidcSessionID-rt_refreshTokenID:userID",
+				refreshToken: "V2_oidcSessionID;rt_refreshTokenID:userID",
 			},
 			res{
 				model: &OIDCSessionWriteModel{
@@ -1966,7 +1966,7 @@ func TestCommands_RevokeOIDCSessionToken(t *testing.T) {
 			},
 			args{
 				ctx:      authz.WithInstanceID(context.Background(), "instanceID"),
-				token:    "V2_oidcSessionID-rt_refreshTokenID",
+				token:    "V2_oidcSessionID;rt_refreshTokenID",
 				clientID: "clientID",
 			},
 			res{
@@ -1991,7 +1991,7 @@ func TestCommands_RevokeOIDCSessionToken(t *testing.T) {
 			},
 			args{
 				ctx:      authz.WithInstanceID(context.Background(), "instanceID"),
-				token:    "V2_oidcSessionID-rt_refreshTokenID",
+				token:    "V2_oidcSessionID;rt_refreshTokenID",
 				clientID: "clientID",
 			},
 			res{
@@ -2027,7 +2027,7 @@ func TestCommands_RevokeOIDCSessionToken(t *testing.T) {
 			},
 			args{
 				ctx:      authz.WithInstanceID(context.Background(), "instanceID"),
-				token:    "V2_oidcSessionID-rt_refreshTokenID",
+				token:    "V2_oidcSessionID;rt_refreshTokenID",
 				clientID: "clientID",
 			},
 			res{
@@ -2052,7 +2052,7 @@ func TestCommands_RevokeOIDCSessionToken(t *testing.T) {
 			},
 			args{
 				ctx:      authz.WithInstanceID(context.Background(), "instanceID"),
-				token:    "V2_oidcSessionID-at_accessTokenID",
+				token:    "V2_oidcSessionID;at_accessTokenID",
 				clientID: "clientID",
 			},
 			res{
@@ -2077,7 +2077,7 @@ func TestCommands_RevokeOIDCSessionToken(t *testing.T) {
 			},
 			args{
 				ctx:      authz.WithInstanceID(context.Background(), "instanceID"),
-				token:    "V2_oidcSessionID-at_accessTokenID",
+				token:    "V2_oidcSessionID;at_accessTokenID",
 				clientID: "clientID",
 			},
 			res{
@@ -2113,7 +2113,7 @@ func TestCommands_RevokeOIDCSessionToken(t *testing.T) {
 			},
 			args{
 				ctx:      authz.WithInstanceID(context.Background(), "instanceID"),
-				token:    "V2_oidcSessionID-at_accessTokenID",
+				token:    "V2_oidcSessionID;at_accessTokenID",
 				clientID: "clientID",
 			},
 			res{
