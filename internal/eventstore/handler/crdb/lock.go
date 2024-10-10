@@ -36,7 +36,7 @@ type locker struct {
 }
 
 func NewLocker(client *sql.DB, lockTable, projectionName string) Locker {
-	workerName, err := id.SonyFlakeGenerator().Next()
+	workerName, err := id.UUIDGenerator().Next()
 	logging.OnError(err).Panic("unable to generate lockID")
 	return &locker{
 		client: client,

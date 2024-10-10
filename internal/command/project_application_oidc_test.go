@@ -24,7 +24,7 @@ import (
 
 func TestAddOIDCApp(t *testing.T) {
 	type fields struct {
-		idGenerator id.Generator
+		uuidGenerator id.Generator
 	}
 	type args struct {
 		app    *addOIDCApp
@@ -114,7 +114,7 @@ func TestAddOIDCApp(t *testing.T) {
 		{
 			name: "correct, using uris with whitespaces",
 			fields: fields{
-				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID"),
+				uuidGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID"),
 			},
 			args: args{
 				app: &addOIDCApp{
@@ -181,7 +181,7 @@ func TestAddOIDCApp(t *testing.T) {
 		{
 			name: "correct",
 			fields: fields{
-				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID"),
+				uuidGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID"),
 			},
 			args: args{
 				app: &addOIDCApp{
@@ -246,7 +246,7 @@ func TestAddOIDCApp(t *testing.T) {
 		{
 			name: "correct with old ID format",
 			fields: fields{
-				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID@project"),
+				uuidGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID@project"),
 			},
 			args: args{
 				app: &addOIDCApp{
@@ -311,7 +311,7 @@ func TestAddOIDCApp(t *testing.T) {
 		{
 			name: "with secret",
 			fields: fields{
-				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID"),
+				uuidGenerator: id_mock.NewIDGeneratorExpectIDs(t, "clientID"),
 			},
 			args: args{
 				app: &addOIDCApp{
@@ -377,7 +377,7 @@ func TestAddOIDCApp(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := Commands{
-				idGenerator:     tt.fields.idGenerator,
+				uuidGenerator:   tt.fields.uuidGenerator,
 				newHashedSecret: mockHashedSecret("secret"),
 				defaultSecretGenerators: &SecretGenerators{
 					ClientSecret: emptyConfig,

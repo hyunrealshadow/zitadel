@@ -35,7 +35,7 @@ func (c *Commands) AddAPIAppCommand(app *addAPIApp) preparation.Validation {
 				return nil, zerrors.ThrowNotFound(err, "PROJE-Sf2gb", "Errors.Project.NotFound")
 			}
 
-			app.ClientID, err = c.idGenerator.Next()
+			app.ClientID, err = c.uuidGenerator.Next()
 			if err != nil {
 				return nil, zerrors.ThrowInternal(err, "V2-f0pgP", "Errors.Internal")
 			}

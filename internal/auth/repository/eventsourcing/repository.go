@@ -81,7 +81,7 @@ func Start(ctx context.Context, conf Config, systemDefaults sd.SystemDefaults, c
 			CustomTextProvider:        queries,
 			PasswordReset:             command,
 			PasswordChecker:           command,
-			IdGenerator:               id.SonyFlakeGenerator(),
+			IdGenerator:               id.UUIDGenerator(),
 		},
 		eventstore.TokenRepo{
 			View:       view,

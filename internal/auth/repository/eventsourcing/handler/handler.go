@@ -41,7 +41,7 @@ func Register(ctx context.Context, configs Config, view *view.View, queries *que
 		configs.overwrite("UserSession"),
 		view,
 		queries,
-		id.SonyFlakeGenerator(),
+		id.UUIDGenerator(),
 	))
 
 	projections = append(projections, newToken(ctx,

@@ -72,7 +72,7 @@ func copyEvents(ctx context.Context, source, dest *db.DB, bulkSize uint32) {
 	start := time.Now()
 	reader, writer := io.Pipe()
 
-	migrationID, err := id.SonyFlakeGenerator().Next()
+	migrationID, err := id.ULIDGenerator().Next()
 	logging.OnError(err).Fatal("unable to generate migration id")
 
 	sourceConn, err := source.Conn(ctx)

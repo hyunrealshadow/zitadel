@@ -44,6 +44,7 @@ type Commands struct {
 	eventstore     *eventstore.Eventstore
 	static         static.Storage
 	idGenerator    id.Generator
+	uuidGenerator  id.Generator
 	zitadelRoles   []authz.RoleMapping
 	externalDomain string
 	externalSecure bool
@@ -111,7 +112,8 @@ func StartCommands(
 	if externalDomain == "" {
 		return nil, zerrors.ThrowInvalidArgument(nil, "COMMAND-Df21s", "no external domain specified")
 	}
-	idGenerator := id.SonyFlakeGenerator()
+	idGenerator := id.ULIDGenerator()
+	uuidGenerator := id.UUIDGenerator()
 	// reuse the oidcEncryption to be able to handle both tokens in the interceptor later on
 	sessionAlg := oidcEncryption
 
@@ -127,6 +129,7 @@ func StartCommands(
 		eventstore:                      es,
 		static:                          staticStore,
 		idGenerator:                     idGenerator,
+		uuidGenerator:                   uuidGenerator,
 		zitadelRoles:                    zitadelRoles,
 		externalDomain:                  externalDomain,
 		externalSecure:                  externalSecure,

@@ -633,8 +633,8 @@ func testSetup(ctx context.Context, c *Commands, validations []preparation.Valid
 
 func TestCommandSide_setupMinimalInterfaces(t *testing.T) {
 	type fields struct {
-		eventstore  func(t *testing.T) *eventstore.Eventstore
-		idGenerator id.Generator
+		eventstore    func(t *testing.T) *eventstore.Eventstore
+		uuidGenerator id.Generator
 	}
 	type args struct {
 		ctx         context.Context
@@ -670,7 +670,7 @@ func TestCommandSide_setupMinimalInterfaces(t *testing.T) {
 						},
 					)...,
 				),
-				idGenerator: id_mock.NewIDGeneratorExpectIDs(t, projectClientIDs()...),
+				uuidGenerator: id_mock.NewIDGeneratorExpectIDs(t, projectClientIDs()...),
 			},
 			args: args{
 				ctx:         contextWithInstanceSetupInfo(context.Background(), "INSTANCE", "PROJECT", "console-id", "DOMAIN"),
@@ -687,8 +687,8 @@ func TestCommandSide_setupMinimalInterfaces(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			r := &Commands{
-				eventstore:  tt.fields.eventstore(t),
-				idGenerator: tt.fields.idGenerator,
+				eventstore:    tt.fields.eventstore(t),
+				uuidGenerator: tt.fields.uuidGenerator,
 			}
 			validations := make([]preparation.Validation, 0)
 			setupMinimalInterfaces(r, &validations, tt.args.instanceAgg, tt.args.orgAgg, tt.args.owner, tt.args.ids)
@@ -1017,6 +1017,7 @@ func TestCommandSide_setupDefaultOrg(t *testing.T) {
 			r := &Commands{
 				eventstore:         tt.fields.eventstore(t),
 				idGenerator:        tt.fields.idGenerator,
+				uuidGenerator:      tt.fields.idGenerator,
 				zitadelRoles:       tt.fields.roles,
 				userPasswordHasher: tt.fields.userPasswordHasher,
 				keyAlgorithm:       tt.fields.keyAlgorithm,
@@ -1186,6 +1187,7 @@ func TestCommandSide_setUpInstance(t *testing.T) {
 			r := &Commands{
 				eventstore:         tt.fields.eventstore(t),
 				idGenerator:        tt.fields.idGenerator,
+				uuidGenerator:      tt.fields.idGenerator,
 				zitadelRoles:       tt.fields.roles,
 				userPasswordHasher: tt.fields.userPasswordHasher,
 				keyAlgorithm:       tt.fields.keyAlgorithm,
